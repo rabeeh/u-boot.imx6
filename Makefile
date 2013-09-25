@@ -3321,7 +3321,12 @@ mx6q_arm2_iram_config	: unconfig
 		  echo "... with iram configuration" ; \
 		}
 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 mx6q_arm2 freescale mx6
-
+mx6solo_c1_config	: unconfig
+	@[ -z "$(findstring iram_,$@)" ] || \
+		{ echo "TEXT_BASE = 0x00907000" >$(obj)board/freescale/mx6q_c1/config.tmp ; \
+		  echo "... with iram configuration" ; \
+		}
+	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 mx6q_c1 freescale mx6
 mx6solo_sabresd_android_config                  \
 mx6solo_sabresd_config			\
 mx6dl_sabresd_config			\
@@ -3332,7 +3337,7 @@ mx6q_sabresd_android_config             \
 mx6q_sabresd_mfg_config			\
 mx6q_sabresd_iram_config	: unconfig
 	@[ -z "$(findstring iram_,$@)" ] || \
-		{ echo "TEXT_BASE = 0x00907000" >$(obj)board/freescale/mx6q_sabresd/config.tmp ; \
+		{ echo "TEXe_BASE = 0x00907000" >$(obj)board/freescale/mx6q_sabresd/config.tmp ; \
 		  echo "... with iram configuration" ; \
 		}
 	@$(MKCONFIG) $(@:_config=) arm arm_cortexa8 mx6q_sabresd freescale mx6
