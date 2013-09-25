@@ -3260,6 +3260,7 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_MX6Q_SABRESD	       3980
 #define MACH_TYPE_MX6SL_ARM2           4091
 #define MACH_TYPE_MX6SL_EVK            4307
+#define MACH_TYPE_C1		       4773
 
 #ifdef CONFIG_ARCH_EBSA110
 # ifdef machine_arch_type
@@ -42216,6 +42217,17 @@ extern unsigned int __machine_arch_type;
 /*
  * These have not yet been registered
  */
+#ifdef CONFIG_MACH_C1
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_C1
+# endif
+# define machine_is_mx6q_c1() (machine_arch_type == MACH_TYPE_C1)
+#else
+# define machine_is_mx6q_c1()	(0)
+#endif
 
 #ifndef machine_arch_type
 #define machine_arch_type	__machine_arch_type
